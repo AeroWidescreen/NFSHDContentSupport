@@ -1,6 +1,5 @@
 # Prerequisites
 *.d
-*.vs
 
 # Compiled Object files
 *.slo
@@ -32,3 +31,14 @@
 *.exe
 *.out
 *.app
+
+# Misc
+*.vs
+*.ilk
+*.pdb
+*.tlog
+*.log
+*.res
+*.idb
+*.iobj
+*.ipdb
