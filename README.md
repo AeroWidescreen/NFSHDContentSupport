@@ -19,6 +19,9 @@ Improved support for high-resolution textures and videos. This plugin is the suc
 - HD Font Support
 - HD Cursor Support
 
+## Download
+https://nfsmods.xyz/mod/2151
+
 ## How To Use
 1. Move the appropriate *scripts* folder to your game's install folder.
 2. Download and extract [Ultimate-ASI-Loader.zip](https://github.com/ThirteenAG/Ultimate-ASI-Loader/releases).
