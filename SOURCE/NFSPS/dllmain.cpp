@@ -12,6 +12,8 @@ DWORD FontScaleCodeCave1Exit = 0x700620;
 DWORD FontScaleCodeCave1Exit2 = 0x70061C;
 DWORD FontScaleCodeCave2Exit = 0x5A175F;
 DWORD FontScaleCodeCave2Exit2 = 0x5A1738;
+DWORD FontScaleCodeCave3Exit = 0x5A199F;
+DWORD FontScaleCodeCave3Exit2 = 0x5A1988;
 DWORD CursorScaleCodeCave1Exit = 0x5A0C2A;
 DWORD CursorScaleCodeCave2Exit = 0x5A0C40;
 DWORD CursorScaleCodeCave3Exit = 0x5A0C50;
@@ -164,6 +166,80 @@ void __declspec(naked) FontScaleCodeCave2()
 	}
 }
 
+void __declspec(naked) FontScaleCodeCave3()
+{
+	__asm {
+	FontScaleCodeCave3Check1:
+		cmp dword ptr ds : [edx + 0x59] , 0x544E4F46 // checks for "FONT"
+		jne FontScaleCodeCave3None
+		cmp dword ptr ds : [edx + 0x5D] , 0x53464E5F // checks for "NFS"
+		jne FontScaleCodeCave3None
+		cmp dword ptr ds : [edx + 0x61] , 0x444F425F // checks for "BODY" (FONT_NFS_BODY)
+		je FontScaleCodeCave3Scale1
+		cmp dword ptr ds : [edx + 0x61] , 0x4E454D5F // checks for "MENU" (FONT_NFS_MENU)
+		je FontScaleCodeCave3Scale1
+		cmp dword ptr ds : [edx + 0x61] , 0x4245445F// checks for "DEBUG" (FONT_NFS_DEBUG)
+		je FontScaleCodeCave3Scale1
+		cmp dword ptr ds : [edx + 0x61] , 0x4341545F // checks for "TACH" (FONT_NFS_TACH_NUMBERS)
+		je FontScaleCodeCave3Scale2
+		cmp dword ptr ds : [edx + 0x61] , 0x5449545F // checks for "TITLE" (FONT_NFS_TITLE)
+		je FontScaleCodeCave3Scale3
+		cmp dword ptr ds : [edx + 0x61] , 0x0058465F // checks for "FX" (FONT_NFS_FX)
+		je FontScaleCodeCave3Scale4
+		jmp FontScaleCodeCave3None
+
+	FontScaleCodeCave3Scale1 :
+		mov edi, 0x0100 // 256 FONT_NFS_BODY, FONT_NFS_MENU, FONT_NFS_DEBUG
+		mov dword ptr ds : [esp + 0x18], esi
+		mov dword ptr ds : [esp + 0x24], edi
+		add esi, 0xFFFFFFFF
+		movzx edi, byte ptr ds : [eax + 0x02]
+		fild dword ptr ds : [esp + 0x24]
+		mov dword ptr ds : [esp + 0x24], esi
+		mov edx, 0x0100 // 256 FONT_NFS_BODY, FONT_NFS_MENU, FONT_NFS_DEBUG
+		jmp FontScaleCodeCave3Exit
+
+	FontScaleCodeCave3Scale2 :
+		mov edi, 0x0080 // 128 FONT_NFS_TACH_NUMBERS
+		mov dword ptr ds : [esp + 0x18] , esi
+		mov dword ptr ds : [esp + 0x24] , edi
+		add esi, 0xFFFFFFFF
+		movzx edi, byte ptr ds : [eax + 0x02]
+		fild dword ptr ds : [esp + 0x24]
+		mov dword ptr ds : [esp + 0x24] , esi
+		mov edx, 0x0080 // 128 FONT_NFS_TACH_NUMBERS
+		jmp FontScaleCodeCave3Exit
+
+	FontScaleCodeCave3Scale3:
+		mov edi, 0x0200 // 512 FONT_NFS_TITLE
+		mov dword ptr ds : [esp + 0x18] , esi
+		mov dword ptr ds : [esp + 0x24] , edi
+		add esi, 0xFFFFFFFF
+		movzx edi, byte ptr ds : [eax + 0x02]
+		fild dword ptr ds : [esp + 0x24]
+		mov dword ptr ds : [esp + 0x24] , esi
+		mov edx, 0x0100 // 256 FONT_NFS_TITLE
+		jmp FontScaleCodeCave3Exit
+
+	FontScaleCodeCave3Scale4 :
+		mov edi, 0x0400 // 1024 FONT_NFS_FX
+		mov dword ptr ds : [esp + 0x18] , esi
+		mov dword ptr ds : [esp + 0x24] , edi
+		add esi, 0xFFFFFFFF
+		movzx edi, byte ptr ds : [eax + 0x02]
+		fild dword ptr ds : [esp + 0x24]
+		mov dword ptr ds : [esp + 0x24] , esi
+		mov edx, 0x0200 // 512 FONT_NFS_FX
+		jmp FontScaleCodeCave3Exit
+
+	FontScaleCodeCave3None :
+		movsx edi, word ptr ds : [edx + 0x28]
+		mov dword ptr ds : [esp + 0x18], esi
+		jmp FontScaleCodeCave2Exit2
+	}
+}
+
+
 void __declspec(naked) CursorScaleCodeCave1()
 {
 	__asm
@@ -217,6 +293,7 @@ void Init()
 	{
 		injector::MakeJMP(0x700614, FontScaleCodeCave1, true);
 		injector::MakeJMP(0x5A1730, FontScaleCodeCave2, true);
+		injector::MakeJMP(0x5A1980, FontScaleCodeCave3, true);
 	}
 
 	if (HDCursorSupport)
