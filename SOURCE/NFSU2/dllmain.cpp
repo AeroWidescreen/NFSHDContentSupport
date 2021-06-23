@@ -5,8 +5,7 @@
 #include <cstdint>
 #include "..\includes\IniReader.h"
 #include <d3d9.h>
-
-bool HDFontSupport, HDCursorSupport;
+#include "..\settings.h"
 
 DWORD FontScaleCodeCave1Exit = 0x51BFDF;
 DWORD FontScaleCodeCave1Exit2 = 0x51BFD8;
@@ -244,6 +243,9 @@ void Init()
 	// General
 	HDFontSupport = iniReader.ReadInteger("GENERAL", "HDFontSupport", 1);
 	HDCursorSupport = iniReader.ReadInteger("GENERAL", "HDCursorSupport", 1);
+	GlobalNeon = iniReader.ReadInteger("GENERAL", "GlobalNeon", 0);
+	GlobalShadowIG = iniReader.ReadInteger("GENERAL", "GlobalShadowIG", 0);
+	GlobalShadowFE = iniReader.ReadInteger("GENERAL", "GlobalShadowFE", 0);
 
 	if (HDFontSupport)
 	{
@@ -253,10 +255,25 @@ void Init()
 	
 	if (HDCursorSupport)
 	{
-		injector::MakeJMP(0x0050B6A4, CursorScaleCodeCave, true);
+		injector::MakeJMP(0x50B6A4, CursorScaleCodeCave, true);
+	}
+
+	if (GlobalNeon)
+	{
+		injector::WriteMemory(0x6329B1, &"HD_NEON", true);
+		injector::WriteMemory(0x63883E, &"HD_NEON", true);
+	}
+
+	if (GlobalShadowIG)
+	{
+		injector::WriteMemory(0x6387EC, &"HD_SHADOWIG", true);
+	}
+
+	if (GlobalShadowFE)
+	{
+		injector::WriteMemory(0x63880D, &"HD_SHADOWFE", true);
 	}
 }
-	
 
 BOOL APIENTRY DllMain(HMODULE /*hModule*/, DWORD reason, LPVOID /*lpReserved*/)
 {
@@ -271,7 +288,7 @@ BOOL APIENTRY DllMain(HMODULE /*hModule*/, DWORD reason, LPVOID /*lpReserved*/)
 
 		else
 		{
-			MessageBoxA(NULL, "This .exe is not supported.\nPlease use v1.2 NTSC speed2.exe (4,57 MB (4.800.512 bytes)).", "NFSU2 HD Content Support", MB_ICONERROR);
+			MessageBoxA(NULL, "This .exe is not supported.\nPlease use v1.2 NTSC speed2.exe (4,57 MB (4.800.512 bytes)).", "NFSU2 HD Content Support by Aero_", MB_ICONERROR);
 			return FALSE;
 		}
 	}

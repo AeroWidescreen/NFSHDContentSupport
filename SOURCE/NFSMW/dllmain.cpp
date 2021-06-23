@@ -5,8 +5,7 @@
 #include <cstdint>
 #include "..\includes\IniReader.h"
 #include <d3d9.h>
-
-bool HDFontSupport, HDCursorSupport, HDFMVSupport;
+#include "..\settings.h"
 
 DWORD FontScaleCodeCave1Exit = 0x585D7F;
 DWORD FontScaleCodeCave1Part2Exit = 0x585D78;
@@ -214,7 +213,7 @@ BOOL APIENTRY DllMain(HMODULE /*hModule*/, DWORD reason, LPVOID /*lpReserved*/)
 
 		else
 		{
-			MessageBoxA(NULL, "This .exe is not supported.\nPlease use v1.3 English speed.exe (5,75 MB (6.029.312 bytes)).", "NFSMW HD Content Support", MB_ICONERROR);
+			MessageBoxA(NULL, "This .exe is not supported.\nPlease use v1.3 English speed.exe (5,75 MB (6.029.312 bytes)).", "NFSMW HD Content Support by Aero_", MB_ICONERROR);
 			return FALSE;
 		}
 	}

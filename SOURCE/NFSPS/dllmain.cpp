@@ -5,8 +5,7 @@
 #include <cstdint>
 #include "..\includes\IniReader.h"
 #include <d3d9.h>
-
-bool HDFontSupport, HDCursorSupport;
+#include "..\settings.h"
 
 DWORD FontScaleCodeCave1Exit = 0x700620;
 DWORD FontScaleCodeCave1Exit2 = 0x70061C;
@@ -319,7 +318,7 @@ BOOL APIENTRY DllMain(HMODULE /*hModule*/, DWORD reason, LPVOID /*lpReserved*/)
 
 		else
 		{
-			MessageBoxA(NULL, "This .exe is not supported.\nPlease use v1.1 NFS.exe from BATTERY (27,4 MB (28.739.656 bytes)).", "NFSPS HD Content Support", MB_ICONERROR);
+			MessageBoxA(NULL, "This .exe is not supported.\nPlease use v1.1 NFS.exe from BATTERY (27,4 MB (28.739.656 bytes)).", "NFSPS HD Content Support by Aero_", MB_ICONERROR);
 			return FALSE;
 		}
 	}

@@ -5,8 +5,7 @@
 #include <cstdint>
 #include "..\includes\IniReader.h"
 #include <d3d9.h>
-
-bool HDFontSupport, HDCursorSupport;
+#include "..\settings.h"
 
 DWORD FontScaleCodeCave1Exit1 = 0x585D41;
 DWORD FontScaleCodeCave1Exit2 = 0x585D28;
@@ -195,7 +194,7 @@ BOOL APIENTRY DllMain(HMODULE /*hModule*/, DWORD reason, LPVOID /*lpReserved*/)
 
 		else
 		{
-			MessageBoxA(NULL, "This .exe is not supported.\nPlease use v1.4 English nfsc.exe (6,88 MB (7.217.152 bytes)).", "NFSC HD Content Support", MB_ICONERROR);
+			MessageBoxA(NULL, "This .exe is not supported.\nPlease use v1.4 English nfsc.exe (6,88 MB (7.217.152 bytes)).", "NFSC HD Content Support by Aero_", MB_ICONERROR);
 			return FALSE;
 		}
 	}
