@@ -18,6 +18,8 @@ Improved support for high-resolution textures and videos. This plugin is the suc
 ### Need for Speed: Underground 2
 - HD Font Support
 - HD Cursor Support
+- Global Neon Support
+- Global Shadow Support
 
 ## Download
 https://nfsmods.xyz/mod/2151
@@ -33,7 +35,10 @@ Q: What does this do?
 A: It enables support for HD textures and videos by correcting their scaling through an ASI script. No textures or videos are included.  
 
 Q: Can this work with HD Font Support?  
-A: This plugin does exactly what HD Font Support used to do, but more. It's not needed.  
+A: This plugin does exactly what HD Font Support used to do, but more. They can be used together, but it's unnecessary.  
+
+Q: What is Global Neon Support and Global Shadow Support?  
+A: It allows you to load a single neon / shadow texture from GlobalB.lzc for all cars. This makes HD neon and HD shadow textures possible. Please read the instructions in the INI file before enabling  
 
 Q: Can I bundle this with my own mod?  
 A: Yes, but I ask that you credit me as a courtesy.  
