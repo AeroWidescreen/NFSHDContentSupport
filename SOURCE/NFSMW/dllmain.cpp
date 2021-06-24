@@ -21,25 +21,19 @@ void __declspec(naked) FontScaleCodeCave1()
 {
 	__asm {
 	FontScaleCodeCave1Check1:
-		cmp dword ptr ds : [esi + 0x0C], 0x544E4F46 // checks for "FONT"
-		jne FontScaleCodeCave1Check2
-		cmp dword ptr ds : [esi + 0x10], 0x4952415F // checks for "_ARIAL" (FONT_ARIAL)
+		cmp dword ptr ds : [esi + 0x24], 0xA87927BE // checks for "FONT_ARIAL"
 		je FontScaleCodeCave1Scale1
-		cmp dword ptr ds : [esi + 0x14], 0x59444F42 // checks for "BODY" (FONT_MW_BODY)
+		cmp dword ptr ds : [esi + 0x24], 0xAB6215C1 // checks for "FONT_ARIAL12"
 		je FontScaleCodeCave1Scale1
-		cmp dword ptr ds : [esi + 0x14], 0x4C544954 // checks for "TITLE" (FONT_MW_TITLE)
+		cmp dword ptr ds : [esi + 0x24], 0x545570C6 // checks for "FONT_MW_BODY"
+		je FontScaleCodeCave1Scale1
+		cmp dword ptr ds : [esi + 0x24], 0xE0463AFA // checks for "FONT_MW_TITLE"
 		je FontScaleCodeCave1Scale2
-		cmp dword ptr ds : [esi + 0x14], 0x54535543 // checks for "CUSTOM" (FONT_MW_CUSTOM_NUMBERS)
+		cmp dword ptr ds : [esi + 0x24], 0xC7BD87CE // checks for "FONT_MW_CUSTOM_NUMBERS"
+		je FontScaleCodeCave1Scale3
+		cmp dword ptr ds : [esi + 0x24], 0x01424892 // checks for "TAC_NUMBERS"
 		je FontScaleCodeCave1Scale3
 		jmp FontScaleCodeCave1None
-
-	FontScaleCodeCave1Check2:
-		cmp dword ptr ds : [esi + 0x0C], 0x5F434154 // checks for "TAC_"
-		jne FontScaleCodeCave1None
-		cmp dword ptr ds : [esi + 0x10], 0x424D554E // checks for "NUMBERS" (TAC_NUMBERS)
-		je FontScaleCodeCave1Scale3
-		jmp FontScaleCodeCave1None
-
 
 	FontScaleCodeCave1Scale1:
 		mov edi, 0x0100 // 256 FONT_MW_BODY & FONT_ARIAL scale
@@ -73,22 +67,17 @@ void __declspec(naked) FontScaleCodeCave2()
 {
 	__asm {
 	FontScaleCodeCave2Check1:
-		cmp dword ptr ds : [ecx + 0x0C], 0x544E4F46 // checks for "FONT"
-		jne FontScaleCodeCave2Check2
-		cmp dword ptr ds : [ecx + 0x10], 0x4952415F // checks for "_ARIAL" (FONT_ARIAL)
+		cmp dword ptr ds : [ecx + 0x24], 0xA87927BE // checks for "FONT_ARIAL"
 		je FontScaleCodeCave2Scale1
-		cmp dword ptr ds : [ecx + 0x14], 0x59444F42 // checks for "BODY" (FONT_MW_BODY)
+		cmp dword ptr ds : [ecx + 0x24], 0xAB6215C1 // checks for "FONT_ARIAL12"
 		je FontScaleCodeCave2Scale1
-		cmp dword ptr ds : [ecx + 0x14], 0x4C544954 // checks for "TITLE" (FONT_MW_TITLE)
+		cmp dword ptr ds : [ecx + 0x24], 0x545570C6 // checks for "FONT_MW_BODY"
+		je FontScaleCodeCave2Scale1
+		cmp dword ptr ds : [ecx + 0x24], 0xE0463AFA // checks for "FONT_MW_TITLE"
 		je FontScaleCodeCave2Scale2
-		cmp dword ptr ds : [esi + 0x14], 0x54535543 // checks for "CUSTOM" (FONT_MW_CUSTOM_NUMBERS)
+		cmp dword ptr ds : [ecx + 0x24], 0xC7BD87CE // checks for "FONT_MW_CUSTOM_NUMBERS"
 		je FontScaleCodeCave2Scale3
-		jmp FontScaleCodeCave2None
-
-	FontScaleCodeCave2Check2:
-		cmp dword ptr ds : [esi + 0x0C], 0x5F434154 // checks for "TAC_"
-		jne FontScaleCodeCave2None
-		cmp dword ptr ds : [esi + 0x10], 0x424D554E // checks for "NUMBERS" (TAC_NUMBERS)
+		cmp dword ptr ds : [ecx + 0x24], 0x01424892 // checks for "TAC_NUMBERS"
 		je FontScaleCodeCave2Scale3
 		jmp FontScaleCodeCave2None
 

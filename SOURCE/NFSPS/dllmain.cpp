@@ -22,21 +22,17 @@ void __declspec(naked) FontScaleCodeCave1()
 {
 	__asm {
 	FontScaleCodeCave1Check1:
-		cmp dword ptr ds : [esi + 0x59] , 0x544E4F46 // checks for "FONT"
-		jne FontScaleCodeCave1None
-		cmp dword ptr ds : [esi + 0x5D] , 0x53464E5F // checks for "NFS"
-		jne FontScaleCodeCave1None
-		cmp dword ptr ds : [esi + 0x61] , 0x444F425F // checks for "BODY" (FONT_NFS_BODY)
+		cmp dword ptr ds : [esi + 0x0C], 0x94AF4029 // checks for "FONT_NFS_BODY"
 		je FontScaleCodeCave1Scale1
-		cmp dword ptr ds : [esi + 0x61] , 0x4E454D5F // checks for "MENU" (FONT_NFS_MENU)
+		cmp dword ptr ds : [esi + 0x0C], 0x94B51F10 // checks for "FONT_NFS_MENU"
 		je FontScaleCodeCave1Scale1
-		cmp dword ptr ds : [esi + 0x61] , 0x4245445F// checks for "DEBUG" (FONT_NFS_DEBUG)
+		cmp dword ptr ds : [esi + 0x0C], 0x2AB5F1C2 // checks for "FONT_NFS_DEBUG"
 		je FontScaleCodeCave1Scale1
-		cmp dword ptr ds : [esi + 0x61] , 0x4341545F // checks for "TACH" (FONT_NFS_TACH_NUMBERS)
+		cmp dword ptr ds : [esi + 0x0C], 0xEA23AE36 // checks for "FONT_NFS_TACH_NUMBERS"
 		je FontScaleCodeCave1Scale2
-		cmp dword ptr ds : [esi + 0x61] , 0x5449545F // checks for "TITLE" (FONT_NFS_TITLE)
+		cmp dword ptr ds : [esi + 0x0C], 0x2BD9F6BD // checks for "FONT_NFS_TITLE"
 		je FontScaleCodeCave1Scale3
-		cmp dword ptr ds : [esi + 0x61] , 0x0058465F // checks for "FX" (FONT_NFS_FX)
+		cmp dword ptr ds : [esi + 0x0C], 0xD51E0499 // checks for "FONT_NFS_FX"
 		je FontScaleCodeCave1Scale4
 		jmp FontScaleCodeCave1None
 
@@ -80,21 +76,17 @@ void __declspec(naked) FontScaleCodeCave2()
 {
 	__asm {
 	FontScaleCodeCave2Check1:
-		cmp dword ptr ds : [edx + 0x59], 0x544E4F46 // checks for "FONT"
-		jne FontScaleCodeCave2None
-		cmp dword ptr ds : [edx + 0x5D], 0x53464E5F // checks for "NFS"
-		jne FontScaleCodeCave2None
-		cmp dword ptr ds : [edx + 0x61], 0x444F425F // checks for "BODY" (FONT_NFS_BODY)
+		cmp dword ptr ds : [edx + 0x0C], 0x94AF4029 // checks for "FONT_NFS_BODY"
 		je FontScaleCodeCave2Scale1
-		cmp dword ptr ds : [edx + 0x61], 0x4E454D5F // checks for "MENU" (FONT_NFS_MENU)
+		cmp dword ptr ds : [edx + 0x0C], 0x94B51F10 // checks for "FONT_NFS_MENU"
 		je FontScaleCodeCave2Scale1
-		cmp dword ptr ds : [edx + 0x61], 0x4245445F// checks for "DEBUG" (FONT_NFS_DEBUG)
+		cmp dword ptr ds : [edx + 0x0C], 0x2AB5F1C2 // checks for "FONT_NFS_DEBUG"
 		je FontScaleCodeCave2Scale1
-		cmp dword ptr ds : [edx + 0x61], 0x4341545F // checks for "TACH" (FONT_NFS_TACH_NUMBERS)
+		cmp dword ptr ds : [edx + 0x0C], 0xEA23AE36 // checks for "FONT_NFS_TACH_NUMBERS"
 		je FontScaleCodeCave2Scale2
-		cmp dword ptr ds : [edx + 0x61], 0x5449545F // checks for "TITLE" (FONT_NFS_TITLE)
+		cmp dword ptr ds : [edx + 0x0C], 0x2BD9F6BD // checks for "FONT_NFS_TITLE"
 		je FontScaleCodeCave2Scale3
-		cmp dword ptr ds : [edx + 0x61], 0x0058465F // checks for "FX" (FONT_NFS_FX)
+		cmp dword ptr ds : [edx + 0x0C], 0xD51E0499 // checks for "FONT_NFS_FX"
 		je FontScaleCodeCave2Scale4
 		jmp FontScaleCodeCave2None
 
@@ -169,21 +161,17 @@ void __declspec(naked) FontScaleCodeCave3()
 {
 	__asm {
 	FontScaleCodeCave3Check1:
-		cmp dword ptr ds : [edx + 0x59] , 0x544E4F46 // checks for "FONT"
-		jne FontScaleCodeCave3None
-		cmp dword ptr ds : [edx + 0x5D] , 0x53464E5F // checks for "NFS"
-		jne FontScaleCodeCave3None
-		cmp dword ptr ds : [edx + 0x61] , 0x444F425F // checks for "BODY" (FONT_NFS_BODY)
+		cmp dword ptr ds : [edx + 0x0C], 0x94AF4029 // checks for "FONT_NFS_BODY"
 		je FontScaleCodeCave3Scale1
-		cmp dword ptr ds : [edx + 0x61] , 0x4E454D5F // checks for "MENU" (FONT_NFS_MENU)
+		cmp dword ptr ds : [edx + 0x0C], 0x94B51F10 // checks for "FONT_NFS_MENU"
 		je FontScaleCodeCave3Scale1
-		cmp dword ptr ds : [edx + 0x61] , 0x4245445F// checks for "DEBUG" (FONT_NFS_DEBUG)
+		cmp dword ptr ds : [edx + 0x0C], 0x2AB5F1C2 // checks for "FONT_NFS_DEBUG"
 		je FontScaleCodeCave3Scale1
-		cmp dword ptr ds : [edx + 0x61] , 0x4341545F // checks for "TACH" (FONT_NFS_TACH_NUMBERS)
+		cmp dword ptr ds : [edx + 0x0C], 0xEA23AE36 // checks for "FONT_NFS_TACH_NUMBERS"
 		je FontScaleCodeCave3Scale2
-		cmp dword ptr ds : [edx + 0x61] , 0x5449545F // checks for "TITLE" (FONT_NFS_TITLE)
+		cmp dword ptr ds : [edx + 0x0C], 0x2BD9F6BD // checks for "FONT_NFS_TITLE"
 		je FontScaleCodeCave3Scale3
-		cmp dword ptr ds : [edx + 0x61] , 0x0058465F // checks for "FX" (FONT_NFS_FX)
+		cmp dword ptr ds : [edx + 0x0C], 0xD51E0499 // checks for "FONT_NFS_FX"
 		je FontScaleCodeCave3Scale4
 		jmp FontScaleCodeCave3None
 

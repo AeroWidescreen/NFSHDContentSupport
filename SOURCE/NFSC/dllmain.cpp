@@ -20,20 +20,20 @@ void __declspec(naked) FontScaleCodeCave1()
 {
 	__asm {
 	FontScaleCodeCave1Check:
-		cmp dword ptr ds : [eax + 0x59], 0x544E4F46 // checks for "FONT"
-		jne FontScaleCodeCave1None
-		cmp dword ptr ds : [eax + 0x5D], 0x53464E5F // checks for "_NFS_"
-		jne FontScaleCodeCave1None
-		cmp dword ptr ds : [eax + 0x61], 0x444F425F // checks for "BODY" (FONT_NFS_BODY)
+		cmp dword ptr ds : [eax + 0x0C], 0x94AF4029 // checks for "FONT_NFS_BODY"
 		je FontScaleCodeCave1Scale1
-		cmp dword ptr ds : [eax + 0x61], 0x5449545F // checks for "TITLE" (FONT_NFS_TITLE)
+		cmp dword ptr ds : [eax + 0x0C], 0x2AB5F1C2 // checks for "FONT_NFS_DEBUG"
+		je FontScaleCodeCave1Scale1
+		cmp dword ptr ds : [eax + 0x0C], 0x2BD9F6BD // checks for "FONT_NFS_TITLE"
 		je FontScaleCodeCave1Scale2
-		cmp dword ptr ds : [eax + 0x61], 0x564F4D5F // checks for "MOVIE" (FONT_NFS_MOVIE_LARGE)
+		cmp dword ptr ds : [eax + 0x0C], 0xAFC18AC5 // checks for "FONT_NFS_MOVIE_LARGE"
 		je FontScaleCodeCave1Scale3
+		cmp dword ptr ds : [eax + 0x0C], 0xEA23AE36 // checks for "FONT_NFS_TACH_NUMBERS"
+		je FontScaleCodeCave1Scale4
 		jmp FontScaleCodeCave1None
 
 	FontScaleCodeCave1Scale1:
-		mov edi, 0x0100 // 256: FONT_NFS_BODY
+		mov edi, 0x0100 // 256: FONT_NFS_BODY, FONT_NFS_DEBUG
 		mov dword ptr ds : [esp + 0x0C], esi
 		mov dword ptr ds : [esp + 0x20], edi
 		dec esi
@@ -41,7 +41,7 @@ void __declspec(naked) FontScaleCodeCave1()
 		fild dword ptr ds : [esp + 0x20]
 		movzx esi, byte ptr ds : [edx + 0x02]
 		fstp dword ptr ds : [esp + 0x20]
-		mov eax, 0x0100 // 256: FONT_NFS_BODY
+		mov eax, 0x0100 // 256: FONT_NFS_BODY, FONT_NFS_DEBUG
 		jmp FontScaleCodeCave1Exit1
 
 	FontScaleCodeCave1Scale2:
@@ -68,6 +68,18 @@ void __declspec(naked) FontScaleCodeCave1()
 		mov eax, 0x0200 // 512: FONT_NFS_MOVIE_LARGE
 		jmp FontScaleCodeCave1Exit1
 
+	FontScaleCodeCave1Scale4:
+		mov edi, 0x0080 // 128: FONT_NFS_TACH_NUMBERS
+		mov dword ptr ds : [esp + 0x0C] , esi
+		mov dword ptr ds : [esp + 0x20] , edi
+		dec esi
+		mov dword ptr ds : [esp + 0x08] , esi
+		fild dword ptr ds : [esp + 0x20]
+		movzx esi, byte ptr ds : [edx + 0x02]
+		fstp dword ptr ds : [esp + 0x20]
+		mov eax, 0x0040 // 64: FONT_NFS_TACH_NUMBERS
+		jmp FontScaleCodeCave1Exit1
+
 	FontScaleCodeCave1None:
 		movsx edi, word ptr ds : [eax + 0x28]
 		mov dword ptr ds : [esp + 0x0C], esi
@@ -79,22 +91,22 @@ void __declspec(naked) FontScaleCodeCave2()
 {
 	__asm {
 	FontScaleCodeCave2Check:
-		cmp dword ptr ds : [ecx + 0x59], 0x544E4F46 // checks for "FONT"
-		jne FontScaleCodeCave2None
-		cmp dword ptr ds : [ecx + 0x5D], 0x53464E5F // checks for "_NFS_"
-		jne FontScaleCodeCave2None
-		cmp dword ptr ds : [ecx + 0x61], 0x444F425F // checks for "BODY" (FONT_NFS_BODY)
+		cmp dword ptr ds : [ecx + 0x0C], 0x94AF4029 // checks for "FONT_NFS_BODY"
 		je FontScaleCodeCave2Scale1
-		cmp dword ptr ds : [ecx + 0x61], 0x5449545F // checks for "TITLE" (FONT_NFS_TITLE)
+		cmp dword ptr ds : [ecx + 0x0C], 0x2AB5F1C2 // checks for "FONT_NFS_DEBUG"
+		je FontScaleCodeCave2Scale1
+		cmp dword ptr ds : [ecx + 0x0C], 0x2BD9F6BD // checks for "FONT_NFS_TITLE"
 		je FontScaleCodeCave2Scale2
-		cmp dword ptr ds : [ecx + 0x61], 0x564F4D5F // checks for "MOVIE" (FONT_NFS_MOVIE_LARGE)
+		cmp dword ptr ds : [ecx + 0x0C], 0xAFC18AC5 // checks for "FONT_NFS_MOVIE_LARGE"
 		je FontScaleCodeCave2Scale3
+		cmp dword ptr ds : [ecx + 0x0C], 0xEA23AE36 // checks for "FONT_NFS_TACH_NUMBERS"
+		je FontScaleCodeCave2Scale4
 		jmp FontScaleCodeCave2None
 
 	FontScaleCodeCave2Scale1:
-		mov edx, 0x0100 // 256: FONT_NFS_BODY
+		mov edx, 0x0100 // 256: FONT_NFS_BODY, FONT_NFS_DEBUG
 		mov dword ptr ds : [esp + 0x18] , edx
-		mov eax, 0x0100 // 256: FONT_NFS_BODY
+		mov eax, 0x0100 // 256: FONT_NFS_BODY, FONT_NFS_DEBUG
 		jmp FontScaleCodeCave2Exit1
 			
 	FontScaleCodeCave2Scale2:
@@ -107,6 +119,12 @@ void __declspec(naked) FontScaleCodeCave2()
 		mov edx, 0x0200 // 512: FONT_NFS_MOVIE_LARGE
 		mov dword ptr ds : [esp + 0x18] , edx
 		mov eax, 0x0200 // 512: FONT_NFS_MOVIE_LARGE
+		jmp FontScaleCodeCave2Exit1
+
+	FontScaleCodeCave2Scale4:
+		mov edx, 0x0080 // 128: FONT_NFS_TACH_NUMBERS
+		mov dword ptr ds : [esp + 0x18] , edx
+		mov eax, 0x0040 // 64: FONT_NFS_TACH_NUMBERS
 		jmp FontScaleCodeCave2Exit1
 
 	FontScaleCodeCave2None:
