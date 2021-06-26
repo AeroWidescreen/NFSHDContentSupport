@@ -43,3 +43,4 @@
 *.iobj
 *.ipdb
 SOURCE/NFSPS/Release/NFSPSHDContentSupport.asi.recipe
+*.recipe

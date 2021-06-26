@@ -8,3 +8,4 @@ bool HDFMVSupport;
 bool GlobalNeon;
 bool GlobalShadowIG;
 bool GlobalShadowFE;
+bool WidescreenSplash;

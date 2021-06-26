@@ -210,6 +210,8 @@ void __declspec(naked) TextureScaleCodeCave1()
 	__asm {
 		cmp dword ptr ds : [eax + 0x24], 0x37BD6804 // checks for "DRAG_HEAT_FILL"
 		je TextureScaleCodeCave1Scale1
+		cmp dword ptr ds : [eax + 0x24], 0x435AEE12 // checks for "DRAG_NOS_FILL"
+		je TextureScaleCodeCave1Scale1
 		movsx ecx, word ptr ds : [eax + 0x46]
 		mov dword ptr ds : [esp + 0x34], ecx
 		ret
@@ -218,6 +220,25 @@ void __declspec(naked) TextureScaleCodeCave1()
 	TextureScaleCodeCave1Scale1:
 		mov ecx, 0x0100 // 256: DRAG_HEAT_FILL
 		mov dword ptr ds : [esp + 0x34], ecx
+		ret
+	}
+}
+
+void __declspec(naked) WidescreenSplashCodeCave()
+{
+	__asm {
+		cmp dword ptr ds : [esi + 0x38], 0x44200000 // 640
+		jne ExitCode
+		cmp dword ptr ds : [esi + 0x3C], 0x43F00000 // 480
+		jne ExitCode
+		cmp dword ptr ds : [esi + 0x40] , 0x00000000 // 0
+		jne ExitCode
+		cmp dword ptr ds : [esi + 0x44] , 0x00000000 // 0
+		jne ExitCode
+		mov dword ptr ds : [esi + 0x38], 0x44555555 // 853 (16:9)
+
+	ExitCode:
+		mov ecx, 0x3F800000
 		ret
 	}
 }
@@ -234,6 +255,7 @@ void Init()
 	GlobalNeon = iniReader.ReadInteger("GENERAL", "GlobalNeon", 0);
 	GlobalShadowIG = iniReader.ReadInteger("GENERAL", "GlobalShadowIG", 0);
 	GlobalShadowFE = iniReader.ReadInteger("GENERAL", "GlobalShadowFE", 0);
+	WidescreenSplash = iniReader.ReadInteger("GENERAL", "WidescreenSplash", 0);
 
 	if (HDFontSupport)
 	{
@@ -266,6 +288,11 @@ void Init()
 	if (GlobalShadowFE)
 	{
 		injector::WriteMemory(0x63880D, &"HD_SHADOWFE", true);
+	}
+
+	if (WidescreenSplash)
+	{
+		injector::MakeCALL(0x51B10A, WidescreenSplashCodeCave, true);
 	}
 }
 
