@@ -205,20 +205,36 @@ void __declspec(naked) CursorScaleCodeCave()
 	}
 }
 
-void __declspec(naked) TextureScaleCodeCave1()
+void __declspec(naked) TextureScaleXCodeCave()
+{
+	__asm {
+		cmp dword ptr ds : [eax + 0x24] , 0xACBAF9EF // checks for "GETAWAY_DISTANCE_BAR"
+		je TextureScaleXCodeCaveScale1
+		movsx ecx, word ptr ds : [eax + 0x44]
+		mov dword ptr ds : [esp + 0x34] , ecx
+		ret
+
+		TextureScaleXCodeCaveScale1 :
+		mov ecx, 0x0100 // 266: GETAWAY_DISTANCE_BAR
+		mov dword ptr ds : [esp + 0x34] , ecx
+		ret
+	}
+}
+
+void __declspec(naked) TextureScaleYCodeCave()
 {
 	__asm {
 		cmp dword ptr ds : [eax + 0x24], 0x37BD6804 // checks for "DRAG_HEAT_FILL"
-		je TextureScaleCodeCave1Scale1
+		je TextureScaleYCodeCaveScale1
 		cmp dword ptr ds : [eax + 0x24], 0x435AEE12 // checks for "DRAG_NOS_FILL"
-		je TextureScaleCodeCave1Scale1
+		je TextureScaleYCodeCaveScale1
 		movsx ecx, word ptr ds : [eax + 0x46]
 		mov dword ptr ds : [esp + 0x34], ecx
 		ret
 
 
-	TextureScaleCodeCave1Scale1:
-		mov ecx, 0x0100 // 256: DRAG_HEAT_FILL
+	TextureScaleYCodeCaveScale1:
+		mov ecx, 0x0100 // 256: DRAG_HEAT_FILL, DRAG_NOS_FILL
 		mov dword ptr ds : [esp + 0x34], ecx
 		ret
 	}
@@ -231,9 +247,9 @@ void __declspec(naked) WidescreenSplashCodeCave()
 		jne ExitCode
 		cmp dword ptr ds : [esi + 0x3C], 0x43F00000 // 480
 		jne ExitCode
-		cmp dword ptr ds : [esi + 0x40] , 0x00000000 // 0
+		cmp dword ptr ds : [esi + 0x40], 0x00000000 // 0
 		jne ExitCode
-		cmp dword ptr ds : [esi + 0x44] , 0x00000000 // 0
+		cmp dword ptr ds : [esi + 0x44], 0x00000000 // 0
 		jne ExitCode
 		mov dword ptr ds : [esi + 0x38], 0x44555555 // 853 (16:9)
 
@@ -270,7 +286,9 @@ void Init()
 
 	if (HDTextureSupport)
 	{
-		injector::MakeCALL(0x4C6709, TextureScaleCodeCave1, true);
+		injector::MakeCALL(0x4C67F9, TextureScaleXCodeCave, true);
+		injector::MakeNOP(0x4C67FE, 3, true);
+		injector::MakeCALL(0x4C6709, TextureScaleYCodeCave, true);
 		injector::MakeNOP(0x4C670E, 3, true);
 	}
 
