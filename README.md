@@ -18,6 +18,7 @@ Improved support for high-resolution textures and videos. This plugin is the suc
 ### Need for Speed: Underground 2
 - HD Font Support
 - HD Cursor Support
+- HD FMV Support
 - Global Neon Support
 - Global Shadow Support
 
@@ -36,6 +37,9 @@ A: It enables support for HD textures and videos by correcting their scaling thr
 
 Q: Can this work with HD Font Support?  
 A: This plugin does exactly what HD Font Support used to do, but more. They can be used together, but it's unnecessary.  
+
+Q: Why don't my HD videos display in the correct aspect ratio?  
+A: You must use FMVWidescreenMode = 2 from the Widescreen Fix. HD Content Support corrects the scaling, Widescreen Fix corrects the aspect ratio.  
 
 Q: What is Global Neon Support and Global Shadow Support?  
 A: It allows you to load a single neon / shadow texture from GlobalB.lzc for all cars. This makes HD neon and HD shadow textures possible. Please read the instructions in the INI file before enabling  
