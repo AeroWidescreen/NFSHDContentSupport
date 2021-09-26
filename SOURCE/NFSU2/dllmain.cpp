@@ -12,6 +12,7 @@ DWORD FontScaleCodeCave1Exit2 = 0x51BFD8;
 DWORD FontScaleCodeCave2Exit = 0x5C5294;
 DWORD FontScaleCodeCave2Exit2 = 0x5C5290;
 DWORD CursorScaleCodeCaveExit = 0x50B6AA;
+DWORD FMVScaleCodeCaveExit = 0x536977;
 
 void __declspec(naked) FontScaleCodeCave1()
 {
@@ -259,6 +260,25 @@ void __declspec(naked) WidescreenSplashCodeCave()
 	}
 }
 
+void __declspec(naked) FMVScaleCodeCave()
+{
+	__asm
+	{
+		mov word ptr ds : [edi + 0x46], 0x0200 // 512 FMV Scale Y
+		movsx ecx, word ptr ds : [edi + 0x46]
+		test ecx, ecx
+		mov dword ptr ds : [esp + 0x14], ecx
+		fild dword ptr ds : [esp + 0x14]
+		jnl Conditional
+		fadd dword ptr ds : [0x78454C]
+	
+	Conditional:
+		mov word ptr ds : [edi + 0x44], 0x0200  // 512 FMV Scale X
+		movsx eax, word ptr ds : [edi + 0x44]
+		jmp FMVScaleCodeCaveExit
+	}
+}
+
 void Init()
 {
 	// Read values from .ini
@@ -267,6 +287,7 @@ void Init()
 	// General
 	HDFontSupport = iniReader.ReadInteger("GENERAL", "HDFontSupport", 1);
 	HDCursorSupport = iniReader.ReadInteger("GENERAL", "HDCursorSupport", 1);
+	HDFMVSupport = iniReader.ReadInteger("GENERAL", "HDFMVSupport", 1);
 	HDTextureSupport = iniReader.ReadInteger("GENERAL", "HDTextureSupport", 1);
 	GlobalNeon = iniReader.ReadInteger("GENERAL", "GlobalNeon", 0);
 	GlobalShadowIG = iniReader.ReadInteger("GENERAL", "GlobalShadowIG", 0);
@@ -282,6 +303,12 @@ void Init()
 	if (HDCursorSupport)
 	{
 		injector::MakeJMP(0x50B6A4, CursorScaleCodeCave, true);
+	}
+
+	if (HDFMVSupport)
+	{
+		injector::MakeJMP(0x53695D, FMVScaleCodeCave, true);
+		injector::MakeNOP(0x536962, 1, true);
 	}
 
 	if (HDTextureSupport)
