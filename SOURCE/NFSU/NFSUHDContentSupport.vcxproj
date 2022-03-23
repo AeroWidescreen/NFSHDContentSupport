@@ -11,10 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{DB0656F3-661B-4944-A65C-537566A17025}</ProjectGuid>
+    <ProjectGuid>{6EE4EF00-0529-4200-A81D-2BC1F3E038AF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NFSU2HDContentSupport</RootNamespace>
-    <ProjectName>NFSU2HDContentSupport</ProjectName>
+    <RootNamespace>NFSUHDContentSupport</RootNamespace>
+    <ProjectName>NFSUHDContentSupport</ProjectName>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -102,7 +102,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="NFSU2HDContentSupport.rc" />
+    <ResourceCompile Include="NFSUHDContentSupport.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
