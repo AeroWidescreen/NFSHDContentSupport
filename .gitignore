@@ -1,46 +1,25 @@
-# Prerequisites
-*.d
+// Release Folder
+SOURCE/NFSPS/Release/
+SOURCE/NFSC/Release/
+SOURCE/NFSMW/Release/
+SOURCE/NFSU2/Release/
+SOURCE/NFSU/Release/
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+// Debug Folder
+SOURCE/Debug/
+SOURCE/NFSPS/Debug/
+SOURCE/NFSC/Debug/
+SOURCE/NFSMW/Debug/
+SOURCE/NFSU2/Debug/
+SOURCE/NFSU/Debug/
 
-# Precompiled Headers
-*.gch
-*.pch
+// Visual Studio Folder
+SOURCE/.vs/
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-*.asi
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# Misc
-*.vs
-*.ilk
+// Files
 *.pdb
-*.tlog
-*.log
-*.res
-*.idb
-*.iobj
-*.ipdb
-SOURCE/NFSPS/Release/NFSPSHDContentSupport.asi.recipe
-*.recipe
+*.asi
+*.json
+*.suo
+*.db
+*.ipch

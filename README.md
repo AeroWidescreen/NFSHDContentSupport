@@ -22,6 +22,12 @@ Improved support for high-resolution textures and videos. This plugin is the suc
 - Global Neon Support
 - Global Shadow Support
 
+### Need for Speed: Underground
+- HD Font Support
+- HD Cursor Support
+- Global Neon Support
+- Global Shadow Support
+
 ## Download
 https://nfsmods.xyz/mod/2151
 
