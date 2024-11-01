@@ -1,5 +1,14 @@
-# NFS HD Content Support
-Improved support for high-resolution textures and videos. This plugin is the successor of the now deprecated HD Font Support.
+# NFS HD Content Support  
+Improved support for high-resolution textures and videos. This plugin is the successor of the now deprecated HD Font Support.  
+
+## Download  
+https://nfsmods.xyz/mod/2151  
+
+## How To Use
+1. Move the appropriate *scripts* folder to your game's install folder.  
+2. Download and extract [Ultimate-ASI-Loader.zip](https://github.com/ThirteenAG/Ultimate-ASI-Loader/releases).  
+3. Move *dinput8.dll* to your game's install folder.  
+4. Enjoy!  
 
 ## Features
 ### Need for Speed: ProStreet
@@ -26,16 +35,7 @@ Improved support for high-resolution textures and videos. This plugin is the suc
 - HD Font Support
 - HD Cursor Support
 - Global Neon Support
-- Global Shadow Support
-
-## Download
-https://nfsmods.xyz/mod/2151
-
-## How To Use
-1. Move the appropriate *scripts* folder to your game's install folder.
-2. Download and extract [Ultimate-ASI-Loader.zip](https://github.com/ThirteenAG/Ultimate-ASI-Loader/releases).
-3. Move *dinput8.dll* to your game's install folder.
-4. Enjoy!
+- Global Shadow Support  
 
 ## FAQ
 Q: What does this do?  
@@ -55,4 +55,4 @@ A: Yes, but I ask that you credit me as a courtesy.
 
  ## Credits
 [Aero_](https://github.com/AeroWidescreen) : Creator of NFS HD Content Support.  
-[ExOpts Team](https://github.com/ExOptsTeam) : The project is based on Extra Options and it wouldn't exist without them.
+[ExOpts Team](https://github.com/ExOptsTeam) : The project is based on Extra Options and it wouldn't exist without them.  
